@@ -124,7 +124,7 @@ export const en = {
       eyebrow: "Derived insight",
       value: "{{ratio}}x",
       label: "more capital per barrel of daily capacity than the previous increment",
-      note: "{{low}} per bbl/day from 2024 to 2026. {{high}} for the next 800,000, because the $100B also covers infrastructure.",
+      note: "The next 800,000 bbl/day are budgeted at $100B, which also covers infrastructure: the unit cost is an upper bound, not an average.",
     },
     gap: {
       eyebrow: "Transparency gap",
@@ -202,7 +202,7 @@ export const en = {
     eyebrow: "Methodology",
     title: "Where every number comes from",
     description:
-      "This dashboard has no backend, no database and no live feeds. It has the public record, and a rule about what may be done with it.",
+      "This page has the public record, and a rule about what may be done with it.",
     legend: {
       title: "How to read the labels",
       description: "Four labels, used on every figure on this page.",
@@ -210,31 +210,6 @@ export const en = {
     sources: {
       title: "Sources",
       description: "All public statements, accessed {{date}}.",
-    },
-    rules: {
-      title: "Rules applied",
-      description: "What this page is allowed to claim.",
-      items: [
-        [
-          { strong: "Reported" },
-          " figures are quoted, never reworded into a different unit. Barrels stay barrels, dollars stay dollars.",
-        ],
-        [
-          { strong: "Derived" },
-          " figures show their formula on screen. Every number I computed can be recomputed from the linked source.",
-        ],
-        [
-          { strong: "Modeled" },
-          " values would be labelled as mine. Only the scenario planner uses one, and it says so.",
-        ],
-        [
-          { strong: "Targets" },
-          " are drawn in a different colour from results and are never counted as production.",
-        ],
-        [
-          "Figures on different bases are never summed. The $100B programme and the $209B royalty projection live in the same chart, on the same axis, with a note saying why they are not comparable.",
-        ],
-      ] as Part[][],
     },
   },
 
@@ -244,7 +219,7 @@ export const en = {
     contact: "Email",
     stack: {
       title: "Stack",
-      description: "Everything here was built with these.",
+      description: "Tools I work with.",
     },
   },
 

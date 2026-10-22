@@ -17,13 +17,8 @@ import {
   type ChartConfig,
 } from "@/components/ui/chart";
 import { getDataset } from "@/data/dataset";
-import { CAPITAL_INTENSITY_RATIO } from "@/data/nabep";
-import { copy, fill, locales, type Lang } from "@/i18n";
-import {
-  formatNumber,
-  formatUsdCompact,
-  formatUsdExact,
-} from "@/lib/format";
+import { copy, locales, type Lang } from "@/i18n";
+import { formatNumber } from "@/lib/format";
 
 export function ProductionTrajectoryChart({ lang }: { lang: Lang }) {
   const t = copy[lang].charts.trajectory;
@@ -161,36 +156,5 @@ export function CapitalIntensityChart({ lang }: { lang: Lang }) {
         </Bar>
       </BarChart>
     </ChartContainer>
-  );
-}
-
-export function CapitalFormulas({ lang }: { lang: Lang }) {
-  const t = copy[lang].charts.capital;
-  const locale = locales[lang];
-
-  return (
-    <ul className="space-y-1.5">
-      {getDataset(lang).capitalPhases.map((phase) => (
-        <li
-          key={phase.label}
-          className="flex flex-wrap items-baseline justify-between gap-2 text-xs"
-        >
-          <span className="font-mono text-muted-foreground">
-            {formatUsdCompact(phase.capexUsd, locale)} ÷ (
-            {formatNumber(phase.toBpd, locale)} −{" "}
-            {formatNumber(phase.fromBpd, locale)}) {t.unit}
-          </span>
-          <span className="font-mono text-foreground">
-            {formatUsdExact(phase.capexUsd, locale)} → $
-            {formatNumber(phase.usdPerBpd, locale)}
-          </span>
-        </li>
-      ))}
-      <li className="pt-1 text-xs font-medium text-foreground">
-        {fill(t.footnote, {
-          ratio: formatNumber(CAPITAL_INTENSITY_RATIO, locale),
-        })}
-      </li>
-    </ul>
   );
 }

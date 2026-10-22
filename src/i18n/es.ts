@@ -116,7 +116,7 @@ export const es: Copy = {
       eyebrow: "Hallazgo derivado",
       value: "{{ratio}}x",
       label: "más capital por barril de capacidad diaria que el tramo anterior",
-      note: "{{low}} por bbl/día entre 2024 y 2026. {{high}} para los próximos 800.000, porque los $100B también cubren infraestructura.",
+      note: "Los próximos 800.000 bbl/día están presupuestados en $100B, que también cubren infraestructura: el costo unitario es un techo, no un promedio.",
     },
     gap: {
       eyebrow: "Brecha de transparencia",
@@ -194,7 +194,7 @@ export const es: Copy = {
     eyebrow: "Metodología",
     title: "De dónde sale cada número",
     description:
-      "Este tablero no tiene backend, ni base de datos, ni feeds en vivo. Tiene el registro público, y una regla sobre qué se puede hacer con él.",
+      "Esta página tiene el registro público, y una regla sobre qué se puede hacer con él.",
     legend: {
       title: "Cómo leer las etiquetas",
       description: "Cuatro etiquetas, usadas en cada cifra de esta página.",
@@ -202,31 +202,6 @@ export const es: Copy = {
     sources: {
       title: "Fuentes",
       description: "Todas declaraciones públicas, consultadas el {{date}}.",
-    },
-    rules: {
-      title: "Reglas aplicadas",
-      description: "Qué puede afirmar esta página.",
-      items: [
-        [
-          { strong: "Reportadas" },
-          ": se citan, nunca se reescriben en otra unidad. Los barriles siguen siendo barriles, los dólares siguen siendo dólares.",
-        ],
-        [
-          { strong: "Derivadas" },
-          ": muestran su fórmula en pantalla. Todo número que calculé se puede recalcular desde la fuente enlazada.",
-        ],
-        [
-          { strong: "Modeladas" },
-          ": se marcarían como mías. Solo el planificador de escenarios usa una, y lo dice.",
-        ],
-        [
-          { strong: "Metas" },
-          ": se dibujan en otro color que los resultados y nunca se cuentan como producción.",
-        ],
-        [
-          "Las cifras sobre bases distintas nunca se suman. El programa de $100B y la proyección de $209B en regalías viven en el mismo gráfico, en el mismo eje, con una nota que explica por qué no son comparables.",
-        ],
-      ] as Part[][],
     },
   },
 
@@ -236,7 +211,7 @@ export const es: Copy = {
     contact: "Correo",
     stack: {
       title: "Stack",
-      description: "Todo esto se construyó con esto.",
+      description: "Herramientas con las que trabajo.",
     },
   },
 

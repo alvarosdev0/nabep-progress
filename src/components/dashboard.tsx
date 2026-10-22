@@ -2,10 +2,8 @@
 
 import {
   ArrowDown,
-  ArrowRight,
   ArrowUpRight,
   Briefcase,
-  ChevronDown,
   Code2,
   Download,
   Mail,
@@ -19,7 +17,6 @@ import {
   ReservesRunwayChart,
 } from "@/components/charts/asset-charts";
 import {
-  CapitalFormulas,
   CapitalIntensityChart,
   ProductionTrajectoryChart,
 } from "@/components/charts/production-charts";
@@ -32,6 +29,7 @@ import {
 } from "@/components/provenance";
 import { Rich } from "@/components/rich";
 import { SectionHeader } from "@/components/section";
+import { StackIcon } from "@/components/stack-icon";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -46,12 +44,11 @@ import { getDataset } from "@/data/dataset";
 import {
   ACCESSED_ON,
   CAPITAL_INTENSITY_RATIO,
-  CAPITAL_PHASES,
   type SourceKey,
 } from "@/data/nabep";
 import { profile } from "@/data/profile";
 import { copy, fill, locales, type Copy, type Lang } from "@/i18n";
-import { formatNumber, formatUsdExact } from "@/lib/format";
+import { formatNumber } from "@/lib/format";
 
 type KpiId = keyof Copy["kpi"];
 
@@ -178,10 +175,7 @@ export function Dashboard({ lang }: { lang: Lang }) {
 
             <div className="mt-7 flex flex-wrap items-center gap-3">
               <Button asChild size="lg">
-                <a href="#production">
-                  {t.hero.ctaPrimary}
-                  <ArrowRight data-icon="inline-end" />
-                </a>
+                <a href="#production">{t.hero.ctaPrimary}</a>
               </Button>
               <Button asChild variant="outline" size="lg">
                 <a href="#about">
@@ -293,25 +287,6 @@ export function Dashboard({ lang }: { lang: Lang }) {
               </CardHeader>
               <CardContent>
                 <ProductionTrajectoryChart lang={lang} />
-                <ul className="mt-4 space-y-1.5 border-t border-border/60 pt-3">
-                  {d.trajectory.map((point) => (
-                    <li
-                      key={point.label}
-                      className="flex items-start gap-2 text-xs text-muted-foreground"
-                    >
-                      <ProvenanceTag
-                        provenance={point.provenance}
-                        lang={lang}
-                        className="mt-0.5 shrink-0"
-                      />
-                      <span>
-                        <span className="text-foreground">{point.label}</span>
-                        {" \u2014 "}
-                        {point.note}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
               </CardContent>
             </Card>
 
@@ -324,33 +299,18 @@ export function Dashboard({ lang }: { lang: Lang }) {
               </CardHeader>
               <CardContent>
                 <CapitalIntensityChart lang={lang} />
-                <div className="mt-4 border-t border-border/60 pt-3">
-                  <CapitalFormulas lang={lang} />
-                </div>
               </CardContent>
             </Card>
           </div>
 
-          <div className="mt-6 grid gap-4 lg:grid-cols-2">
+          <div className="mt-6">
             <StatInsight
               eyebrow={t.production.insight.eyebrow}
               value={fill(t.production.insight.value, {
                 ratio: formatNumber(CAPITAL_INTENSITY_RATIO, locale),
               })}
               label={t.production.insight.label}
-              note={fill(t.production.insight.note, {
-                low: formatUsdExact(CAPITAL_PHASES[0].usdPerBpd, locale),
-                high: formatUsdExact(CAPITAL_PHASES[1].usdPerBpd, locale),
-              })}
-            />
-            <StatInsight
-              eyebrow={t.production.gap.eyebrow}
-              value={fill(t.production.gap.value, {
-                unnamed: formatNumber(d.counts.unnamed, locale),
-                contracts: formatNumber(d.counts.contracted, locale),
-              })}
-              label={t.production.gap.label}
-              note={t.production.gap.note}
+              note={t.production.insight.note}
             />
           </div>
 
@@ -622,31 +582,6 @@ export function Dashboard({ lang }: { lang: Lang }) {
             </Card>
 
             <Card>
-              <CardContent className="pt-6">
-                <details className="group" open>
-                  <summary className="flex cursor-pointer list-none items-start justify-between gap-4">
-                    <div>
-                      <p className="text-sm font-semibold">
-                        {t.method.rules.title}
-                      </p>
-                      <p className="mt-1 text-xs text-muted-foreground">
-                        {t.method.rules.description}
-                      </p>
-                    </div>
-                    <ChevronDown className="mt-0.5 size-4 shrink-0 text-muted-foreground transition-transform group-open:rotate-180" />
-                  </summary>
-                  <ol className="mt-5 grid gap-x-8 gap-y-3 text-xs leading-relaxed text-muted-foreground sm:grid-cols-2">
-                    {t.method.rules.items.map((item, index) => (
-                      <li key={index}>
-                        <Rich parts={item} />
-                      </li>
-                    ))}
-                  </ol>
-                </details>
-              </CardContent>
-            </Card>
-
-            <Card>
               <CardHeader>
                 <CardTitle>{t.method.legend.title}</CardTitle>
                 <CardDescription>{t.method.legend.description}</CardDescription>
@@ -760,49 +695,116 @@ export function Dashboard({ lang }: { lang: Lang }) {
                 <CardDescription>{t.about.stack.description}</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="flex flex-wrap gap-2">
-                  {profile.stack.map((item) => (
-                    <Badge key={item} variant="secondary">
-                      {item}
-                    </Badge>
+                <ul className="grid gap-3">
+                  {p.stack.map((item) => (
+                    <li key={item.name} className="flex items-start gap-3">
+                      <StackIcon
+                        name={item.icon}
+                        className="mt-0.5 size-4 shrink-0 text-foreground/80"
+                      />
+                      <span>
+                        <span className="block text-sm text-foreground">
+                          {item.name}
+                        </span>
+                        <span className="block text-xs leading-snug text-muted-foreground">
+                          {item.detail}
+                        </span>
+                      </span>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </CardContent>
             </Card>
           </div>
 
-          <div className="mt-4 space-y-4">
-            {p.experience.items.map((job) => (
-              <Card key={job.company}>
-                <CardHeader>
-                  <CardTitle>{p.experience.title}</CardTitle>
-                  <CardDescription>
-                    {job.role} · {job.company}
-                  </CardDescription>
-                  <CardAction>
-                    <span className="font-mono text-[11px] text-muted-foreground">
-                      {job.period}
+          <div className="mt-4 grid gap-4 lg:grid-cols-2 lg:items-start">
+            <Card>
+              <CardHeader>
+                <CardTitle>{p.experience.title}</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                {p.experience.items.map((job, index) => (
+                  <div
+                    key={job.company}
+                    className={
+                      index > 0 ? "border-t border-border/60 pt-6" : undefined
+                    }
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <div>
+                        <p className="text-sm font-medium text-foreground">
+                          {job.role} · {job.company}
+                        </p>
+                        <p className="mt-0.5 text-xs text-muted-foreground">
+                          {job.location}
+                        </p>
+                      </div>
+                      {job.period && (
+                        <span className="shrink-0 font-mono text-[11px] text-muted-foreground">
+                          {job.period}
+                        </span>
+                      )}
+                    </div>
+                    <ul className="mt-3 grid gap-2">
+                      {job.bullets.map((bullet) => (
+                        <li
+                          key={bullet}
+                          className="flex gap-2.5 text-sm leading-relaxed text-muted-foreground"
+                        >
+                          <span className="mt-2 size-1 shrink-0 rounded-full bg-primary/70" />
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>{p.education.title}</CardTitle>
+                <CardDescription>
+                  {p.education.items[0].degree} · {p.education.items[0].school}
+                </CardDescription>
+                <CardAction>
+                  <span className="font-mono text-[11px] text-muted-foreground">
+                    {p.education.items[0].period}
+                  </span>
+                </CardAction>
+              </CardHeader>
+              <CardContent>
+                <p className="mb-3 text-xs text-muted-foreground">
+                  {p.education.items[0].location}
+                </p>
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  {p.education.items[0].detail}
+                </p>
+                <a
+                  href={p.education.certification.url}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="group mt-4 flex items-start justify-between gap-3 border-t border-border/60 pt-3"
+                >
+                  <span>
+                    <span className="block text-[11px] uppercase tracking-wide text-muted-foreground">
+                      {p.education.certification.label}
                     </span>
-                  </CardAction>
-                </CardHeader>
-                <CardContent>
-                  <p className="mb-3 text-xs text-muted-foreground">
-                    {job.location}
-                  </p>
-                  <ul className="grid gap-2 sm:grid-cols-2">
-                    {job.bullets.map((bullet) => (
-                      <li
-                        key={bullet}
-                        className="flex gap-2.5 text-sm leading-relaxed text-muted-foreground"
-                      >
-                        <span className="mt-2 size-1 shrink-0 rounded-full bg-primary/70" />
-                        <span>{bullet}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            ))}
+                    <span className="block text-sm text-foreground">
+                      {p.education.certification.title}
+                    </span>
+                    <span className="block text-xs text-muted-foreground">
+                      {p.education.certification.issuer} ·{" "}
+                      {p.education.certification.year}
+                    </span>
+                  </span>
+                  <span className="inline-flex items-center gap-1 text-xs text-muted-foreground transition-colors group-hover:text-primary">
+                    {p.education.certification.action}
+                    <ArrowUpRight className="size-3.5" />
+                  </span>
+                </a>
+              </CardContent>
+            </Card>
           </div>
         </section>
       </main>
