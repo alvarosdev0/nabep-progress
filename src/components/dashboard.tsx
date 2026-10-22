@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  ArrowDown,
   ArrowRight,
   ArrowUpRight,
   Briefcase,
@@ -24,7 +25,6 @@ import {
 } from "@/components/charts/production-charts";
 import { RampPlanner } from "@/components/charts/ramp-planner";
 import { ValueFlowChart, WorkforceChart } from "@/components/charts/value-charts";
-import { ExportDatasetButton } from "@/components/export-data";
 import {
   ProvenanceLegend,
   ProvenanceTag,
@@ -183,28 +183,12 @@ export function Dashboard({ lang }: { lang: Lang }) {
                   <ArrowRight data-icon="inline-end" />
                 </a>
               </Button>
-              {profile.cv ? (
-                <Button asChild variant="outline" size="lg">
-                  <a href={profile.cv} download>
-                    {t.hero.ctaSecondary}
-                    <Download data-icon="inline-end" />
-                  </a>
-                </Button>
-              ) : profile.email ? (
-                <Button asChild variant="outline" size="lg">
-                  <a href={`mailto:${profile.email}`}>
-                    {t.hero.ctaContact}
-                    <Mail data-icon="inline-end" />
-                  </a>
-                </Button>
-              ) : (
-                <Button asChild variant="outline" size="lg">
-                  <a href="#about">
-                    {t.hero.ctaContact}
-                    <ArrowRight data-icon="inline-end" />
-                  </a>
-                </Button>
-              )}
+              <Button asChild variant="outline" size="lg">
+                <a href="#about">
+                  {t.hero.ctaSecondary}
+                  <ArrowDown data-icon="inline-end" />
+                </a>
+              </Button>
             </div>
 
             <p className="mt-4 max-w-xl text-[11px] leading-relaxed text-muted-foreground/80">
@@ -615,9 +599,6 @@ export function Dashboard({ lang }: { lang: Lang }) {
                 <CardDescription>
                   {fill(t.method.sources.description, { date: ACCESSED_ON })}
                 </CardDescription>
-                <CardAction>
-                  <ExportDatasetButton lang={lang} />
-                </CardAction>
               </CardHeader>
               <CardContent>
                 <ul className="grid gap-2.5 sm:grid-cols-2">
@@ -722,92 +703,58 @@ export function Dashboard({ lang }: { lang: Lang }) {
             }
           />
 
-          <div className="grid gap-6 lg:grid-cols-[1.3fr_1fr]">
-            <div className="space-y-4">
-              <Card>
-                <CardContent className="pt-6">
-                  <p className="text-base leading-relaxed text-foreground/90">
-                    {p.summary}
-                  </p>
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {profile.cv && (
-                      <Button asChild size="sm">
-                        <a href={profile.cv} download>
-                          <Download data-icon="inline-start" />
-                          {t.about.cv}
-                        </a>
-                      </Button>
-                    )}
-                    {profile.linkedin && (
-                      <Button asChild variant="outline" size="sm">
-                        <a
-                          href={`https://${profile.linkedin}`}
-                          target="_blank"
-                          rel="noreferrer noopener"
-                        >
-                          <Briefcase data-icon="inline-start" />
-                          LinkedIn
-                        </a>
-                      </Button>
-                    )}
-                    {profile.email && (
-                      <Button asChild variant="outline" size="sm">
-                        <a href={`mailto:${profile.email}`}>
-                          <Mail data-icon="inline-start" />
-                          {t.about.contact}
-                        </a>
-                      </Button>
-                    )}
-                    {profile.github && (
-                      <Button asChild variant="outline" size="sm">
-                        <a
-                          href={`https://${profile.github}`}
-                          target="_blank"
-                          rel="noreferrer noopener"
-                        >
-                          <Code2 data-icon="inline-start" />
-                          GitHub
-                        </a>
-                      </Button>
-                    )}
-                  </div>
-                </CardContent>
-              </Card>
+          <div className="grid gap-4 lg:grid-cols-[1.4fr_1fr] lg:items-start">
+            <Card>
+              <CardContent className="pt-6">
+                <p className="text-base leading-relaxed text-foreground/90">
+                  {p.summary}
+                </p>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {profile.cv && (
+                    <Button asChild size="sm">
+                      <a href={profile.cv} download>
+                        <Download data-icon="inline-start" />
+                        {t.about.cv}
+                      </a>
+                    </Button>
+                  )}
+                  {profile.linkedin && (
+                    <Button asChild variant="outline" size="sm">
+                      <a
+                        href={`https://${profile.linkedin}`}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                      >
+                        <Briefcase data-icon="inline-start" />
+                        LinkedIn
+                      </a>
+                    </Button>
+                  )}
+                  {profile.email && (
+                    <Button asChild variant="outline" size="sm">
+                      <a href={`mailto:${profile.email}`}>
+                        <Mail data-icon="inline-start" />
+                        {t.about.contact}
+                      </a>
+                    </Button>
+                  )}
+                  {profile.github && (
+                    <Button asChild variant="outline" size="sm">
+                      <a
+                        href={`https://${profile.github}`}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                      >
+                        <Code2 data-icon="inline-start" />
+                        GitHub
+                      </a>
+                    </Button>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
 
-              {p.experience.items.map((job) => (
-                <Card key={job.company}>
-                  <CardHeader>
-                    <CardTitle>{p.experience.title}</CardTitle>
-                    <CardDescription>
-                      {job.role} · {job.company}
-                    </CardDescription>
-                    <CardAction>
-                      <span className="font-mono text-[11px] text-muted-foreground">
-                        {job.period}
-                      </span>
-                    </CardAction>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="mb-3 text-xs text-muted-foreground">
-                      {job.location}
-                    </p>
-                    <ul className="space-y-2">
-                      {job.bullets.map((bullet) => (
-                        <li
-                          key={bullet}
-                          className="flex gap-2.5 text-sm leading-relaxed text-muted-foreground"
-                        >
-                          <span className="mt-2 size-1 shrink-0 rounded-full bg-primary/70" />
-                          <span>{bullet}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-
-            <Card className="h-fit">
+            <Card>
               <CardHeader>
                 <CardTitle>{t.about.stack.title}</CardTitle>
                 <CardDescription>{t.about.stack.description}</CardDescription>
@@ -820,13 +767,42 @@ export function Dashboard({ lang }: { lang: Lang }) {
                     </Badge>
                   ))}
                 </div>
-                <div className="mt-6 border-t border-border/60 pt-4 text-xs leading-relaxed text-muted-foreground">
-                  <p>
-                    <Rich parts={t.about.stack.note} />
-                  </p>
-                </div>
               </CardContent>
             </Card>
+          </div>
+
+          <div className="mt-4 space-y-4">
+            {p.experience.items.map((job) => (
+              <Card key={job.company}>
+                <CardHeader>
+                  <CardTitle>{p.experience.title}</CardTitle>
+                  <CardDescription>
+                    {job.role} · {job.company}
+                  </CardDescription>
+                  <CardAction>
+                    <span className="font-mono text-[11px] text-muted-foreground">
+                      {job.period}
+                    </span>
+                  </CardAction>
+                </CardHeader>
+                <CardContent>
+                  <p className="mb-3 text-xs text-muted-foreground">
+                    {job.location}
+                  </p>
+                  <ul className="grid gap-2 sm:grid-cols-2">
+                    {job.bullets.map((bullet) => (
+                      <li
+                        key={bullet}
+                        className="flex gap-2.5 text-sm leading-relaxed text-muted-foreground"
+                      >
+                        <span className="mt-2 size-1 shrink-0 rounded-full bg-primary/70" />
+                        <span>{bullet}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </section>
       </main>

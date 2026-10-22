@@ -40,8 +40,8 @@ export const en = {
   },
 
   hero: {
-    titleLead: "From 18,000 to 200,000 barrels a day.",
-    titleSub: "Now the hard part: 1,000,000.",
+    titleLead: "From 18,000 to 1,000,000",
+    titleSub: "barrels per day",
     subtitle:
       "A progress dashboard built from what NABEP has already published — production, capital, fleet and people — with every figure labelled by where it came from.",
     body: [
@@ -52,8 +52,7 @@ export const en = {
     independent:
       "Independent project. Not affiliated with, or endorsed by, North American Blue Energy Partners.",
     ctaPrimary: "Explore the metrics",
-    ctaSecondary: "Download CV",
-    ctaContact: "Get in touch",
+    ctaSecondary: "About the author",
     card: {
       title: "About the company",
       description: "North American Blue Energy Partners · founded {{founded}}",
@@ -108,7 +107,7 @@ export const en = {
 
   production: {
     eyebrow: "Production",
-    title: "The ramp happened. The next one has to be bigger.",
+    title: "Operational growth and large-scale expansion",
     description:
       "Production moved tenfold in two years on about a billion dollars of company capital. The stated goal is five times today’s volume, on a hundred billion dollars. Those two facts do not fit the same curve, and that is the most interesting thing in the public record.",
     trajectory: {
@@ -162,7 +161,7 @@ export const en = {
 
   value: {
     eyebrow: "Value and governance",
-    title: "Who gets what, and who signs off",
+    title: "Ownership structure and strategic partnerships",
     description:
       "The August 2026 agreement split the company three ways and put board approval in Washington. Two numbers matter for anyone modelling this company: the capital programme and the government take.",
     flow: {
@@ -178,7 +177,7 @@ export const en = {
 
   people: {
     eyebrow: "People",
-    title: "15,000 people, and the company is hiring Venezuelans home",
+    title: "Workforce and the repatriation of national talent",
     description:
       "The CEO’s letter asks Venezuelan engineers and operators who built their careers abroad to come back. The workforce numbers are the clearest statement of intent in the public record.",
     workforce: {
@@ -211,7 +210,6 @@ export const en = {
     sources: {
       title: "Sources",
       description: "All public statements, accessed {{date}}.",
-      download: "Download dataset",
     },
     rules: {
       title: "Rules applied",
@@ -241,17 +239,12 @@ export const en = {
   },
 
   about: {
-    eyebrow: "About me",
+    eyebrow: "About the author",
     cv: "Download CV",
     contact: "Email",
     stack: {
       title: "Stack",
       description: "Everything here was built with these.",
-      note: [
-        "No backend, no database, no API. Static typed data in ",
-        { strong: "src/data/nabep.ts" },
-        ", rendered with Next.js and Recharts, deployed on Vercel.",
-      ] as Part[],
     },
   },
 
@@ -316,7 +309,7 @@ export const en = {
   },
 
   planner: {
-    eyebrow: "Scenario · ramp planner",
+    eyebrow: "Scenario · planner",
     title: "What would it take to reach 1M by {{year}}?",
     description:
       "Move the slider. This is your assumption, not a NABEP forecast — the company has not published a schedule.",

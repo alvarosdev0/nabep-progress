@@ -24,7 +24,7 @@ export const es: Copy = {
       { id: "value", label: "Valor" },
       { id: "people", label: "Personas" },
       { id: "methodology", label: "Método" },
-      { id: "about", label: "Sobre mí" },
+      { id: "about", label: "Sobre el autor" },
     ],
     switchShort: "EN",
     switchLabel: "View in English",
@@ -32,8 +32,8 @@ export const es: Copy = {
   },
 
   hero: {
-    titleLead: "De 18.000 a 200.000 barriles por día.",
-    titleSub: "Ahora lo difícil: 1.000.000.",
+    titleLead: "De 18.000 a 1.000.000",
+    titleSub: "de barriles diarios",
     subtitle:
       "Un tablero de progreso construido con lo que NABEP ya publicó — producción, capital, flota y personas — y con cada cifra etiquetada según su origen.",
     body: [
@@ -44,8 +44,7 @@ export const es: Copy = {
     independent:
       "Proyecto independiente. Sin afiliación ni aval de North American Blue Energy Partners.",
     ctaPrimary: "Explorar las métricas",
-    ctaSecondary: "Descargar CV",
-    ctaContact: "Escríbeme",
+    ctaSecondary: "Sobre el autor",
     card: {
       title: "Sobre la empresa",
       description: "North American Blue Energy Partners · fundada en {{founded}}",
@@ -100,7 +99,7 @@ export const es: Copy = {
 
   production: {
     eyebrow: "Producción",
-    title: "El ramp ya pasó. El próximo tiene que ser más grande.",
+    title: "Crecimiento operativo y escalamiento a gran escala",
     description:
       "La producción se multiplicó por diez en dos años con alrededor de mil millones de dólares de capital propio. La meta declarada es cinco veces el volumen actual, con cien mil millones de dólares. Esos dos datos no se acomodan a la misma curva, y eso es lo más interesante que hay en el registro público.",
     trajectory: {
@@ -154,7 +153,7 @@ export const es: Copy = {
 
   value: {
     eyebrow: "Valor y gobernanza",
-    title: "Quién se lleva qué, y quién firma",
+    title: "Estructura de participación y alianzas estratégicas",
     description:
       "El acuerdo de agosto de 2026 dividió la compañía en tres partes y puso la aprobación del directorio en Washington. Dos números importan para cualquiera que modele esta empresa: el programa de capital y la participación del Estado.",
     flow: {
@@ -170,7 +169,7 @@ export const es: Copy = {
 
   people: {
     eyebrow: "Personas",
-    title: "15.000 personas, y la empresa repatriando ingenieros venezolanos",
+    title: "Fuerza laboral y repatriación de talento nacional",
     description:
       "La carta del CEO les pide a los ingenieros y operadores venezolanos que hicieron carrera afuera que vuelvan. Los números de personal son la declaración de intención más clara del registro público.",
     workforce: {
@@ -203,7 +202,6 @@ export const es: Copy = {
     sources: {
       title: "Fuentes",
       description: "Todas declaraciones públicas, consultadas el {{date}}.",
-      download: "Descargar dataset",
     },
     rules: {
       title: "Reglas aplicadas",
@@ -233,17 +231,12 @@ export const es: Copy = {
   },
 
   about: {
-    eyebrow: "Sobre mí",
+    eyebrow: "Sobre el autor",
     cv: "Descargar CV",
     contact: "Correo",
     stack: {
       title: "Stack",
       description: "Todo esto se construyó con esto.",
-      note: [
-        "Sin backend, sin base de datos, sin API. Datos estáticos y tipados en ",
-        { strong: "src/data/nabep.ts" },
-        ", renderizados con Next.js y Recharts, desplegados en Vercel.",
-      ] as Part[],
     },
   },
 
@@ -311,7 +304,7 @@ export const es: Copy = {
   },
 
   planner: {
-    eyebrow: "Escenario · planificador de ramp",
+    eyebrow: "Escenario · planificador",
     title: "¿Qué haría falta para llegar a 1M en {{year}}?",
     description:
       "Movés el slider. Este es tu supuesto, no un pronóstico de NABEP: la empresa no publicó un cronograma.",

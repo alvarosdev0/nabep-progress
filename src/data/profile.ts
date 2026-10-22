@@ -60,7 +60,7 @@ export const profile: Profile = {
   ],
 
   en: {
-    headline: "Front-end developer · Data visualization",
+    headline: "Systems engineering student · Front-end developer",
     summary:
       "I build dashboards and data products that turn public numbers into decisions. This page is itself the argument: every figure on it is sourced, and every number I computed says how it was computed.",
     experience: {
@@ -70,11 +70,12 @@ export const profile: Profile = {
           role: "Front-end developer",
           company: "Yariz Eats",
           period: "Jul – Aug 2025",
-          location: "Remote · Zulia, Venezuela",
+          location: "Ciudad Ojeda, Venezuela",
           bullets: [
-            "Joined a delivery startup three weeks before launch and took ownership of the store area of a React Native app.",
-            "Built the store dashboard — sales, deliveries, cancellations and commercial activity — plus the product, order and delivery views.",
-            "Connected the interface to the internal API and shipped a modular, maintainable section by the client’s deadline.",
+            "Joined an UberEats-style delivery startup working in React Native with Expo, three weeks before the final delivery.",
+            "Owned the store section: donut charts with a built-in loading bar for sales, deliveries, cancellations and commercial activity, rebuilt to match the Figma designs.",
+            "Built the store profile, product management, active orders and in-progress deliveries views, wired to the internal API.",
+            "Worked on GitHub, tested with the client across devices and left the section ready for the pilot launch.",
           ],
         },
       ],
@@ -82,7 +83,7 @@ export const profile: Profile = {
   } satisfies ProfileContent,
 
   es: {
-    headline: "Desarrollador front-end · Visualización de datos",
+    headline: "Estudiante de ingeniería en sistemas · Desarrollador front-end",
     summary:
       "Construyo tableros y productos de datos que convierten números públicos en decisiones. Esta página es el argumento en sí misma: cada cifra está referenciada y cada número que calculé dice cómo lo calculé.",
     experience: {
@@ -92,11 +93,12 @@ export const profile: Profile = {
           role: "Desarrollador front-end",
           company: "Yariz Eats",
           period: "jul – ago 2025",
-          location: "Remoto · Zulia, Venezuela",
+          location: "Ciudad Ojeda, Venezuela",
           bullets: [
-            "Me sumé a una startup de delivery tres semanas antes del lanzamiento y quedé a cargo del área de tiendas de una app en React Native.",
-            "Construí el tablero de la tienda —ventas, entregas, cancelaciones y actividad comercial— además de las vistas de productos, pedidos y entregas.",
-            "Conecté la interfaz con la API interna y entregué una sección modular y mantenible en la fecha que pidió el cliente.",
+            "Me integré a una startup de delivery tipo UberEats, en React Native con Expo, tres semanas antes de la entrega final.",
+            "Quedé a cargo de la sección de la tienda: gráficos circulares con barra de carga para ventas, entregas, cancelaciones y actividad comercial, recreados a partir de los diseños de Figma.",
+            "Implementé las vistas de perfil de tienda, gestión de productos, pedidos activos y entregas en curso, conectadas a la API interna.",
+            "Trabajé con GitHub, hice pruebas con el cliente en varios dispositivos y dejé la sección lista para el lanzamiento piloto.",
           ],
         },
       ],
