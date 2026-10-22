@@ -89,8 +89,44 @@ two-up → sources → profile.
 
 - [x] Research public NABEP data
 - [x] Design decision
-- [ ] Scaffold Next.js + shadcn
-- [ ] Data layer
-- [ ] Components + page
-- [ ] Build passes
-- [ ] README + deploy notes
+- [x] Scaffold Next.js + shadcn
+- [x] Data layer
+- [x] Components + page
+- [x] Build passes
+- [x] README + deploy notes
+- [x] Bilingual EN/ES (see addendum)
+
+## Addendum — bilingual mode (2026-10-22)
+
+Requested after the first build: Spanish and English, plus a public repo for
+Vercel.
+
+**Approaches considered**
+
+1. **Two static routes** (`/`, `/es`) sharing one component — chosen.
+2. Client context + `localStorage` toggle — rejected: language not in the URL,
+   flash on load, hydration mismatch risk.
+
+English stays at `/` because NABEP publishes in English and the parent company
+is US-based; `/es` is one click away and can be shared directly.
+
+**Shape of the implementation**
+
+- `src/i18n/en.ts` defines the copy and `Copy = typeof en`; `es.ts` is typed as
+  `Copy`, so parity is enforced by the compiler, not by review.
+- Sentences with emphasis are `Part[]` arrays rendered by `<Rich>`; computed
+  numbers arrive as `{{placeholders}}`, so no figure is duplicated in prose.
+- The dataset keeps numbers and provenance once (`nabep.ts`); `nabep.es.ts`
+  overrides only strings; `getDataset(lang)` merges them.
+- Each route has its own root layout, so `<html lang>` is correct in the first
+  byte and there is no client-side language state at all.
+- Number formatting follows the language (`es-VE`): `200,000` vs `200.000`.
+
+**Gotchas found**
+
+- Recharts renders nothing in SSR HTML; visual checks must screenshot the
+  hydrated page, not grep the markup.
+- `es-419` and `es-MX` fall back to `en-US` formatting in the default Node ICU
+  used here, which silently prints English group separators on the Spanish
+  page. `es-VE` works on both server and client.
+
