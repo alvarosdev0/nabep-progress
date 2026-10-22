@@ -3,13 +3,14 @@ import type { ReactNode } from "react";
 
 import { RootShell } from "@/components/root-shell";
 import { copy } from "@/i18n";
+import { profile } from "@/data/profile";
 
 import "../globals.css";
 
 export const metadata: Metadata = {
   title: copy.en.meta.title,
   description: copy.en.meta.description,
-  authors: [{ name: "Your Name" }],
+  authors: [{ name: profile.name }],
   alternates: {
     canonical: "/",
     languages: { en: "/", es: "/es" },

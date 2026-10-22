@@ -31,17 +31,20 @@ export const en = {
   },
 
   hero: {
-    eyebrow: "Job application",
-    eyebrowAccent: "NABEP operations",
     titleLead: "From 18,000 to 200,000 barrels a day.",
     titleSub: "Now the hard part: 1,000,000.",
+    subtitle:
+      "A progress dashboard built from what NABEP has already published — production, capital, fleet and people — with every figure labelled by where it came from.",
     body: [
-      "NABEP’s own brief — in ",
-      { em: "“The Digital Oilfield”" },
-      " — asks for real-time operational visibility, consolidated reporting for the board and precision about units. Its site says it will ",
-      { em: "“use this site to report our progress openly”" },
-      ". This page does exactly that with the numbers the company has already published, and marks every one of them by where it came from.",
+      "NABEP’s own newsroom asks for real-time operational visibility and consolidated reporting. Its site says it will ",
+      { em: "“report our progress openly”" },
+      ". This page does that with the numbers the company has already published.",
     ] as Part[],
+    independent:
+      "Independent project. Not affiliated with, or endorsed by, North American Blue Energy Partners.",
+    ctaPrimary: "Explore the metrics",
+    ctaSecondary: "Download CV",
+    ctaContact: "Get in touch",
     card: {
       title: "About the company",
       description: "North American Blue Energy Partners · founded {{founded}}",
@@ -111,18 +114,15 @@ export const en = {
     },
     insight: {
       eyebrow: "Derived insight",
-      parts: [
-        "The last 182,000 barrels a day cost about $1 billion, roughly $5,500 per barrel of daily capacity. The next 800,000 are budgeted at $100 billion, about $125,000 each, or ",
-        { strong: "{{ratio}}x" },
-        " more capital per barrel. Caveat: the $100B also covers infrastructure, so this is an upper bound on unit cost. Either way, the marginal barrel is a different business than the last one.",
-      ] as Part[],
+      value: "{{ratio}}x",
+      label: "more capital per barrel of daily capacity than the previous increment",
+      note: "{{low}} per bbl/day from 2024 to 2026. {{high}} for the next 800,000, because the $100B also covers infrastructure.",
     },
     gap: {
       eyebrow: "Transparency gap",
-      parts: [
-        "NABEP publishes where it started and where it is going, but not the path between them: no quarterly production series, ",
-        "{{unnamed}} of the {{contracts}} contracted fields are unnamed, and no schedule attaches to the 1M bbl/day goal. A tracker can show that gap honestly, which is more useful than filling it with numbers nobody can trace.",
-      ] as Part[],
+      value: "{{unnamed}}/{{contracts}}",
+      label: "contracted fields have no public name",
+      note: "No quarterly production series and no schedule attached to the 1M goal. The dashboard shows the gap instead of filling it.",
     },
   },
 
@@ -190,18 +190,15 @@ export const en = {
     },
   },
 
-  chain: {
-    eyebrow: "How it works",
-    title: "One barrel, six steps, and NABEP owns all six",
-    description:
-      "From reservoir study to delivery. Owning the whole chain is the company’s stated reason for producing more, faster than a newcomer could.",
-  },
-
   method: {
     eyebrow: "Methodology",
     title: "Where every number comes from",
     description:
       "This dashboard has no backend, no database and no live feeds. It has the public record, and a rule about what may be done with it.",
+    legend: {
+      title: "How to read the labels",
+      description: "Four labels, used on every figure on this page.",
+    },
     sources: {
       title: "Sources",
       description: "All public statements, accessed {{date}}.",
@@ -237,6 +234,8 @@ export const en = {
   about: {
     eyebrow: "About me",
     whyTitle: "Why NABEP",
+    cv: "Download CV",
+    contact: "Email",
     stack: {
       title: "Stack",
       description: "Everything here was built with these.",

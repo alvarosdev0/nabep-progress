@@ -1,8 +1,16 @@
 "use client";
 
-import { ArrowUpRight, Briefcase, Code2, Mail, MapPin } from "lucide-react";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Briefcase,
+  ChevronDown,
+  Code2,
+  Download,
+  Mail,
+  MapPin,
+} from "lucide-react";
 import Link from "next/link";
-import type { ReactNode } from "react";
 
 import {
   FieldsByBasinChart,
@@ -25,6 +33,7 @@ import {
 import { Rich } from "@/components/rich";
 import { SectionHeader } from "@/components/section";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardAction,
@@ -34,26 +43,39 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { getDataset } from "@/data/dataset";
-import { ACCESSED_ON, CAPITAL_INTENSITY_RATIO, type SourceKey } from "@/data/nabep";
+import {
+  ACCESSED_ON,
+  CAPITAL_INTENSITY_RATIO,
+  CAPITAL_PHASES,
+  type SourceKey,
+} from "@/data/nabep";
 import { profile } from "@/data/profile";
 import { copy, fill, locales, type Copy, type Lang } from "@/i18n";
-import { formatNumber } from "@/lib/format";
+import { formatNumber, formatUsdExact } from "@/lib/format";
 
 type KpiId = keyof Copy["kpi"];
 
-function Insight({
+function StatInsight({
   eyebrow,
-  children,
+  value,
+  label,
+  note,
 }: {
   eyebrow: string;
-  children: ReactNode;
+  value: string;
+  label: string;
+  note: string;
 }) {
   return (
     <div className="rounded-lg border border-primary/25 bg-primary/[0.06] p-5">
-      <p className="mb-2 font-mono text-[11px] tracking-[0.18em] text-primary uppercase">
+      <p className="font-mono text-[11px] tracking-[0.18em] text-primary uppercase">
         {eyebrow}
       </p>
-      <div className="text-sm leading-relaxed text-foreground/90">{children}</div>
+      <p className="mt-1 text-3xl font-semibold tracking-tight tabular-nums">
+        {value}
+      </p>
+      <p className="mt-1 text-sm font-medium text-foreground/90">{label}</p>
+      <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{note}</p>
     </div>
   );
 }
@@ -79,22 +101,26 @@ export function Dashboard({ lang }: { lang: Lang }) {
           </div>
           <div className="flex items-center gap-4 text-xs text-muted-foreground">
             <span className="hidden md:inline">{profile.name}</span>
-            <a
-              href={`mailto:${profile.email}`}
-              className="inline-flex items-center gap-1.5 transition-colors hover:text-foreground"
-            >
-              <Mail className="size-3.5" />
-              <span className="hidden sm:inline">{t.nav.contact}</span>
-            </a>
-            <a
-              href={`https://${profile.github}`}
-              target="_blank"
-              rel="noreferrer noopener"
-              className="inline-flex items-center gap-1.5 transition-colors hover:text-foreground"
-            >
-              <Code2 className="size-3.5" />
-              <span className="hidden sm:inline">{t.nav.source}</span>
-            </a>
+            {profile.email && (
+              <a
+                href={`mailto:${profile.email}`}
+                className="inline-flex items-center gap-1.5 transition-colors hover:text-foreground"
+              >
+                <Mail className="size-3.5" />
+                <span className="hidden sm:inline">{t.nav.contact}</span>
+              </a>
+            )}
+            {profile.github && (
+              <a
+                href={`https://${profile.github}`}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="inline-flex items-center gap-1.5 transition-colors hover:text-foreground"
+              >
+                <Code2 className="size-3.5" />
+                <span className="hidden sm:inline">{t.nav.source}</span>
+              </a>
+            )}
             <Link
               href={t.nav.switchHref}
               hrefLang={lang === "en" ? "es" : "en"}
@@ -112,19 +138,51 @@ export function Dashboard({ lang }: { lang: Lang }) {
         {/* ------------------------------------------------ hero */}
         <section className="grid gap-10 pt-14 pb-16 lg:grid-cols-[1.4fr_1fr] lg:items-end">
           <div>
-            <p className="mb-4 font-mono text-[11px] tracking-[0.22em] text-primary uppercase">
-              {t.hero.eyebrow} &middot; {t.hero.eyebrowAccent}
-            </p>
             <h1 className="max-w-3xl text-4xl leading-[1.08] font-semibold tracking-tight text-balance sm:text-5xl">
               {t.hero.titleLead}
               <span className="text-muted-foreground"> {t.hero.titleSub}</span>
             </h1>
-            <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground">
+            <p className="mt-5 max-w-2xl text-base leading-relaxed text-foreground/90">
+              {t.hero.subtitle}
+            </p>
+            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
               <Rich parts={t.hero.body} />
             </p>
-            <div className="mt-8">
-              <ProvenanceLegend lang={lang} />
+
+            <div className="mt-7 flex flex-wrap items-center gap-3">
+              <Button asChild size="lg">
+                <a href="#production">
+                  {t.hero.ctaPrimary}
+                  <ArrowRight data-icon="inline-end" />
+                </a>
+              </Button>
+              {profile.cv ? (
+                <Button asChild variant="outline" size="lg">
+                  <a href={profile.cv} download>
+                    {t.hero.ctaSecondary}
+                    <Download data-icon="inline-end" />
+                  </a>
+                </Button>
+              ) : profile.email ? (
+                <Button asChild variant="outline" size="lg">
+                  <a href={`mailto:${profile.email}`}>
+                    {t.hero.ctaContact}
+                    <Mail data-icon="inline-end" />
+                  </a>
+                </Button>
+              ) : (
+                <Button asChild variant="outline" size="lg">
+                  <a href="#about">
+                    {t.hero.ctaContact}
+                    <ArrowRight data-icon="inline-end" />
+                  </a>
+                </Button>
+              )}
             </div>
+
+            <p className="mt-4 max-w-xl text-[11px] leading-relaxed text-muted-foreground/80">
+              {t.hero.independent}
+            </p>
           </div>
 
           <Card className="bg-card/60">
@@ -263,21 +321,26 @@ export function Dashboard({ lang }: { lang: Lang }) {
           </div>
 
           <div className="mt-6 grid gap-4 lg:grid-cols-2">
-            <Insight eyebrow={t.production.insight.eyebrow}>
-              <Rich
-                parts={t.production.insight.parts}
-                vars={{ ratio: formatNumber(CAPITAL_INTENSITY_RATIO, locale) }}
-              />
-            </Insight>
-            <Insight eyebrow={t.production.gap.eyebrow}>
-              <Rich
-                parts={t.production.gap.parts}
-                vars={{
-                  unnamed: formatNumber(d.counts.unnamed, locale),
-                  contracts: formatNumber(d.counts.contracted, locale),
-                }}
-              />
-            </Insight>
+            <StatInsight
+              eyebrow={t.production.insight.eyebrow}
+              value={fill(t.production.insight.value, {
+                ratio: formatNumber(CAPITAL_INTENSITY_RATIO, locale),
+              })}
+              label={t.production.insight.label}
+              note={fill(t.production.insight.note, {
+                low: formatUsdExact(CAPITAL_PHASES[0].usdPerBpd, locale),
+                high: formatUsdExact(CAPITAL_PHASES[1].usdPerBpd, locale),
+              })}
+            />
+            <StatInsight
+              eyebrow={t.production.gap.eyebrow}
+              value={fill(t.production.gap.value, {
+                unnamed: formatNumber(d.counts.unnamed, locale),
+                contracts: formatNumber(d.counts.contracted, locale),
+              })}
+              label={t.production.gap.label}
+              note={t.production.gap.note}
+            />
           </div>
 
           <div className="mt-6">
@@ -511,42 +574,14 @@ export function Dashboard({ lang }: { lang: Lang }) {
           </div>
         </section>
 
-        {/* ------------------------------------------------ value chain */}
-        <section id="chain" className="mb-20 scroll-mt-20">
-          <SectionHeader
-            eyebrow={`05 · ${t.chain.eyebrow}`}
-            title={t.chain.title}
-            description={t.chain.description}
-            aside={<SourceChips sources={["whatWeDo"]} lang={lang} />}
-          />
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {d.valueChain.map((step, index) => (
-              <div
-                key={step.step}
-                className="rounded-lg border border-border/60 bg-card/40 p-5 transition-colors hover:border-primary/30"
-              >
-                <div className="mb-2 flex items-center gap-2">
-                  <span className="font-mono text-xs text-primary/70">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <span className="text-sm font-semibold">{step.step}</span>
-                </div>
-                <p className="text-xs leading-relaxed text-muted-foreground">
-                  {step.detail}
-                </p>
-              </div>
-            ))}
-          </div>
-        </section>
-
         {/* ------------------------------------------------ methodology */}
         <section id="methodology" className="mb-20 scroll-mt-20">
           <SectionHeader
-            eyebrow={`06 · ${t.method.eyebrow}`}
+            eyebrow={`05 · ${t.method.eyebrow}`}
             title={t.method.title}
             description={t.method.description}
           />
-          <div className="grid gap-6 lg:grid-cols-[1.1fr_1fr]">
+          <div className="grid gap-4">
             <Card>
               <CardHeader>
                 <CardTitle>{t.method.sources.title}</CardTitle>
@@ -558,14 +593,14 @@ export function Dashboard({ lang }: { lang: Lang }) {
                 </CardAction>
               </CardHeader>
               <CardContent>
-                <ul className="space-y-2.5">
+                <ul className="grid gap-2.5 sm:grid-cols-2">
                   {(Object.keys(d.sources) as SourceKey[]).map((key) => (
                     <li key={key}>
                       <a
                         href={d.sources[key].url}
                         target="_blank"
                         rel="noreferrer noopener"
-                        className="group flex items-start justify-between gap-4 rounded-md border border-border/60 p-3 transition-colors hover:border-primary/35 hover:bg-muted/30"
+                        className="group flex h-full items-start justify-between gap-4 rounded-md border border-border/60 p-3 transition-colors hover:border-primary/35 hover:bg-muted/30"
                       >
                         <span className="text-sm text-foreground/90">
                           {d.sources[key].label}
@@ -579,18 +614,37 @@ export function Dashboard({ lang }: { lang: Lang }) {
             </Card>
 
             <Card>
+              <CardContent className="pt-6">
+                <details className="group" open>
+                  <summary className="flex cursor-pointer list-none items-start justify-between gap-4">
+                    <div>
+                      <p className="text-sm font-semibold">
+                        {t.method.rules.title}
+                      </p>
+                      <p className="mt-1 text-xs text-muted-foreground">
+                        {t.method.rules.description}
+                      </p>
+                    </div>
+                    <ChevronDown className="mt-0.5 size-4 shrink-0 text-muted-foreground transition-transform group-open:rotate-180" />
+                  </summary>
+                  <ol className="mt-5 grid gap-x-8 gap-y-3 text-xs leading-relaxed text-muted-foreground sm:grid-cols-2">
+                    {t.method.rules.items.map((item, index) => (
+                      <li key={index}>
+                        <Rich parts={item} />
+                      </li>
+                    ))}
+                  </ol>
+                </details>
+              </CardContent>
+            </Card>
+
+            <Card>
               <CardHeader>
-                <CardTitle>{t.method.rules.title}</CardTitle>
-                <CardDescription>{t.method.rules.description}</CardDescription>
+                <CardTitle>{t.method.legend.title}</CardTitle>
+                <CardDescription>{t.method.legend.description}</CardDescription>
               </CardHeader>
               <CardContent>
-                <ol className="space-y-3 text-sm leading-relaxed text-muted-foreground">
-                  {t.method.rules.items.map((item, index) => (
-                    <li key={index}>
-                      <Rich parts={item} />
-                    </li>
-                  ))}
-                </ol>
+                <ProvenanceLegend lang={lang} />
               </CardContent>
             </Card>
           </div>
@@ -599,36 +653,44 @@ export function Dashboard({ lang }: { lang: Lang }) {
         {/* ------------------------------------------------ about me */}
         <section id="about" className="scroll-mt-20">
           <SectionHeader
-            eyebrow={`07 · ${t.about.eyebrow}`}
+            eyebrow={`06 · ${t.about.eyebrow}`}
             title={profile.name}
             description={p.headline}
             aside={
               <div className="flex flex-wrap items-center gap-4 text-xs text-muted-foreground">
-                <span className="inline-flex items-center gap-1.5">
-                  <MapPin className="size-3.5" /> {profile.location}
-                </span>
-                <a
-                  href={`mailto:${profile.email}`}
-                  className="inline-flex items-center gap-1.5 hover:text-foreground"
-                >
-                  <Mail className="size-3.5" /> {profile.email}
-                </a>
-                <a
-                  href={`https://${profile.linkedin}`}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  className="inline-flex items-center gap-1.5 hover:text-foreground"
-                >
-                  <Briefcase className="size-3.5" /> LinkedIn
-                </a>
-                <a
-                  href={`https://${profile.github}`}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  className="inline-flex items-center gap-1.5 hover:text-foreground"
-                >
-                  <Code2 className="size-3.5" /> GitHub
-                </a>
+                {profile.location && (
+                  <span className="inline-flex items-center gap-1.5">
+                    <MapPin className="size-3.5" /> {profile.location}
+                  </span>
+                )}
+                {profile.email && (
+                  <a
+                    href={`mailto:${profile.email}`}
+                    className="inline-flex items-center gap-1.5 hover:text-foreground"
+                  >
+                    <Mail className="size-3.5" /> {profile.email}
+                  </a>
+                )}
+                {profile.linkedin && (
+                  <a
+                    href={`https://${profile.linkedin}`}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="inline-flex items-center gap-1.5 hover:text-foreground"
+                  >
+                    <Briefcase className="size-3.5" /> LinkedIn
+                  </a>
+                )}
+                {profile.github && (
+                  <a
+                    href={`https://${profile.github}`}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="inline-flex items-center gap-1.5 hover:text-foreground"
+                  >
+                    <Code2 className="size-3.5" /> GitHub
+                  </a>
+                )}
               </div>
             }
           />
@@ -640,8 +702,82 @@ export function Dashboard({ lang }: { lang: Lang }) {
                   <p className="text-base leading-relaxed text-foreground/90">
                     {p.summary}
                   </p>
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {profile.cv && (
+                      <Button asChild size="sm">
+                        <a href={profile.cv} download>
+                          <Download data-icon="inline-start" />
+                          {t.about.cv}
+                        </a>
+                      </Button>
+                    )}
+                    {profile.linkedin && (
+                      <Button asChild variant="outline" size="sm">
+                        <a
+                          href={`https://${profile.linkedin}`}
+                          target="_blank"
+                          rel="noreferrer noopener"
+                        >
+                          <Briefcase data-icon="inline-start" />
+                          LinkedIn
+                        </a>
+                      </Button>
+                    )}
+                    {profile.email && (
+                      <Button asChild variant="outline" size="sm">
+                        <a href={`mailto:${profile.email}`}>
+                          <Mail data-icon="inline-start" />
+                          {t.about.contact}
+                        </a>
+                      </Button>
+                    )}
+                    {profile.github && (
+                      <Button asChild variant="outline" size="sm">
+                        <a
+                          href={`https://${profile.github}`}
+                          target="_blank"
+                          rel="noreferrer noopener"
+                        >
+                          <Code2 data-icon="inline-start" />
+                          GitHub
+                        </a>
+                      </Button>
+                    )}
+                  </div>
                 </CardContent>
               </Card>
+
+              {p.experience.items.map((job) => (
+                <Card key={job.company}>
+                  <CardHeader>
+                    <CardTitle>{p.experience.title}</CardTitle>
+                    <CardDescription>
+                      {job.role} · {job.company}
+                    </CardDescription>
+                    <CardAction>
+                      <span className="font-mono text-[11px] text-muted-foreground">
+                        {job.period}
+                      </span>
+                    </CardAction>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="mb-3 text-xs text-muted-foreground">
+                      {job.location}
+                    </p>
+                    <ul className="space-y-2">
+                      {job.bullets.map((bullet) => (
+                        <li
+                          key={bullet}
+                          className="flex gap-2.5 text-sm leading-relaxed text-muted-foreground"
+                        >
+                          <span className="mt-2 size-1 shrink-0 rounded-full bg-primary/70" />
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </Card>
+              ))}
 
               {p.highlights.map((highlight) => (
                 <Card key={highlight.title}>

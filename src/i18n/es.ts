@@ -6,7 +6,7 @@ import type { Copy, Part } from "./en";
  */
 export const es: Copy = {
   meta: {
-    title: "NABEP Progress — un tracker operativo construido con datos públicos",
+    title: "NABEP Progress - un tablero operativo construido con datos públicos",
     description:
       "Proyecto independiente de postulación: producción, capital, flota y personal publicados por NABEP, graficados con cada cifra etiquetada como reportada, derivada, modelada o meta.",
     ogDescription:
@@ -14,7 +14,7 @@ export const es: Copy = {
   },
 
   nav: {
-    tagline: "Tracker operativo construido con declaraciones públicas",
+    tagline: "Tablero operativo construido con declaraciones públicas",
     contact: "Contacto",
     source: "Código",
     switchShort: "EN",
@@ -23,17 +23,20 @@ export const es: Copy = {
   },
 
   hero: {
-    eyebrow: "Postulación",
-    eyebrowAccent: "operaciones de NABEP",
     titleLead: "De 18.000 a 200.000 barriles por día.",
     titleSub: "Ahora lo difícil: 1.000.000.",
+    subtitle:
+      "Un tablero de progreso construido con lo que NABEP ya publicó — producción, capital, flota y personas — y con cada cifra etiquetada según su origen.",
     body: [
-      "El propio brief de NABEP —en ",
-      { em: "«The Digital Oilfield»" },
-      " — pide visibilidad operativa en tiempo real, reportes consolidados para el directorio y precisión con las unidades. Su sitio dice que ",
-      { em: "«usará este sitio para reportar nuestro progreso abiertamente»" },
-      ". Esta página hace exactamente eso con los números que la empresa ya publicó, y marca cada uno según de dónde salió.",
+      "El newsroom de NABEP pide visibilidad operativa en tiempo real y reportes consolidados. Su sitio dice que ",
+      { em: "«reportará nuestro progreso abiertamente»" },
+      ". Esta página lo hace con los números que la empresa ya publicó.",
     ] as Part[],
+    independent:
+      "Proyecto independiente. Sin afiliación ni aval de North American Blue Energy Partners.",
+    ctaPrimary: "Explorar las métricas",
+    ctaSecondary: "Descargar CV",
+    ctaContact: "Escríbeme",
     card: {
       title: "Sobre la empresa",
       description: "North American Blue Energy Partners · fundada en {{founded}}",
@@ -103,18 +106,15 @@ export const es: Copy = {
     },
     insight: {
       eyebrow: "Hallazgo derivado",
-      parts: [
-        "Los últimos 182.000 barriles por día costaron unos mil millones de dólares: cerca de 5.500 dólares por barril de capacidad diaria. Los próximos 800.000 están presupuestados en 100.000 millones, unos 125.000 dólares cada uno, o sea ",
-        { strong: "{{ratio}}x" },
-        " más capital por barril. Salvedad: esos 100.000 millones también cubren infraestructura, así que esto es un techo del costo unitario. En cualquier caso, el barril marginal es otro negocio.",
-      ] as Part[],
+      value: "{{ratio}}x",
+      label: "más capital por barril de capacidad diaria que el tramo anterior",
+      note: "{{low}} por bbl/día entre 2024 y 2026. {{high}} para los próximos 800.000, porque los $100B también cubren infraestructura.",
     },
     gap: {
       eyebrow: "Brecha de transparencia",
-      parts: [
-        "NABEP publica de dónde partió y a dónde va, pero no el camino entre esos dos puntos: no hay serie trimestral de producción, ",
-        "{{unnamed}} de los {{contracts}} campos contratados no tienen nombre, y la meta de 1 millón de bbl/día no tiene cronograma. Un tracker puede mostrar esa brecha con honestidad, y eso es más útil que rellenarla con números que nadie puede rastrear.",
-      ] as Part[],
+      value: "{{unnamed}}/{{contracts}}",
+      label: "campos contratados no tienen nombre público",
+      note: "Sin serie trimestral de producción y sin cronograma para la meta de 1M. El tablero muestra la brecha en lugar de rellenarla.",
     },
   },
 
@@ -182,18 +182,15 @@ export const es: Copy = {
     },
   },
 
-  chain: {
-    eyebrow: "Cómo funciona",
-    title: "Un barril, seis pasos, y NABEP es dueño de los seis",
-    description:
-      "Del estudio del yacimiento a la entrega. Ser dueño de toda la cadena es la razón que da la empresa para producir más rápido de lo que podría un recién llegado.",
-  },
-
   method: {
     eyebrow: "Metodología",
     title: "De dónde sale cada número",
     description:
       "Este tablero no tiene backend, ni base de datos, ni feeds en vivo. Tiene el registro público, y una regla sobre qué se puede hacer con él.",
+    legend: {
+      title: "Cómo leer las etiquetas",
+      description: "Cuatro etiquetas, usadas en cada cifra de esta página.",
+    },
     sources: {
       title: "Fuentes",
       description: "Todas declaraciones públicas, consultadas el {{date}}.",
@@ -229,6 +226,8 @@ export const es: Copy = {
   about: {
     eyebrow: "Sobre mí",
     whyTitle: "Por qué NABEP",
+    cv: "Descargar CV",
+    contact: "Correo",
     stack: {
       title: "Stack",
       description: "Todo esto se construyó con esto.",

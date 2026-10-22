@@ -78,11 +78,11 @@ export function ProvenanceLegend({ lang }: { lang: Lang }) {
   const { provenance } = getDataset(lang);
 
   return (
-    <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+    <div className="grid gap-x-8 gap-y-3 sm:grid-cols-2">
       {(Object.keys(provenance) as Provenance[]).map((key) => (
-        <div key={key} className="flex items-center gap-2">
-          <ProvenanceTag provenance={key} lang={lang} />
-          <span className="max-w-[16rem] text-xs text-muted-foreground">
+        <div key={key} className="flex items-start gap-2">
+          <ProvenanceTag provenance={key} lang={lang} className="shrink-0" />
+          <span className="text-xs leading-relaxed text-muted-foreground">
             {provenance[key].description}
           </span>
         </div>
