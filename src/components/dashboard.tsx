@@ -91,23 +91,34 @@ export function Dashboard({ lang }: { lang: Lang }) {
       {/* ------------------------------------------------ header */}
       <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-3">
-          <div className="flex items-baseline gap-3">
-            <span className="font-mono text-sm font-semibold tracking-tight">
-              NABEP<span className="text-primary">.</span>progress
-            </span>
-            <span className="hidden text-xs text-muted-foreground sm:inline">
-              {t.nav.tagline}
-            </span>
-          </div>
-          <div className="flex items-center gap-4 text-xs text-muted-foreground">
-            <span className="hidden md:inline">{profile.name}</span>
+          <span className="font-mono text-sm font-semibold tracking-tight">
+            NABEP<span className="text-primary">.</span>progress
+          </span>
+
+          <nav
+            aria-label={t.nav.sectionsLabel}
+            className="hidden items-center gap-1 lg:flex"
+          >
+            {t.nav.sections.map((section) => (
+              <a
+                key={section.id}
+                href={`#${section.id}`}
+                className="rounded-md px-2.5 py-1.5 font-mono text-[11px] tracking-wider text-muted-foreground uppercase transition-colors hover:bg-muted/50 hover:text-foreground"
+              >
+                {section.label}
+              </a>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-3 text-xs text-muted-foreground">
             {profile.email && (
               <a
                 href={`mailto:${profile.email}`}
+                aria-label={t.nav.contact}
+                title={t.nav.contact}
                 className="inline-flex items-center gap-1.5 transition-colors hover:text-foreground"
               >
-                <Mail className="size-3.5" />
-                <span className="hidden sm:inline">{t.nav.contact}</span>
+                <Mail className="size-4" />
               </a>
             )}
             {profile.github && (
@@ -115,10 +126,11 @@ export function Dashboard({ lang }: { lang: Lang }) {
                 href={`https://${profile.github}`}
                 target="_blank"
                 rel="noreferrer noopener"
+                aria-label={t.nav.source}
+                title={t.nav.source}
                 className="inline-flex items-center gap-1.5 transition-colors hover:text-foreground"
               >
-                <Code2 className="size-3.5" />
-                <span className="hidden sm:inline">{t.nav.source}</span>
+                <Code2 className="size-4" />
               </a>
             )}
             <Link
@@ -132,6 +144,21 @@ export function Dashboard({ lang }: { lang: Lang }) {
             </Link>
           </div>
         </div>
+
+        <nav
+          aria-label={t.nav.sectionsLabel}
+          className="flex gap-1 overflow-x-auto border-t border-border/40 px-4 py-2 lg:hidden"
+        >
+          {t.nav.sections.map((section) => (
+            <a
+              key={section.id}
+              href={`#${section.id}`}
+              className="shrink-0 rounded-md px-2.5 py-1 font-mono text-[10px] tracking-wider text-muted-foreground uppercase transition-colors hover:bg-muted/50 hover:text-foreground"
+            >
+              {section.label}
+            </a>
+          ))}
+        </nav>
       </header>
 
       <main className="mx-auto max-w-7xl px-6 pb-24">
@@ -264,7 +291,7 @@ export function Dashboard({ lang }: { lang: Lang }) {
         </section>
 
         {/* ------------------------------------------------ production */}
-        <section id="production" className="mb-20 scroll-mt-20">
+        <section id="production" className="mb-20 scroll-mt-24 lg:scroll-mt-20">
           <SectionHeader
             eyebrow={`01 · ${t.production.eyebrow}`}
             title={t.production.title}
@@ -349,7 +376,7 @@ export function Dashboard({ lang }: { lang: Lang }) {
         </section>
 
         {/* ------------------------------------------------ asset base */}
-        <section id="assets" className="mb-20 scroll-mt-20">
+        <section id="assets" className="mb-20 scroll-mt-24 lg:scroll-mt-20">
           <SectionHeader
             eyebrow={`02 · ${t.assets.eyebrow}`}
             title={t.assets.title}
@@ -444,7 +471,7 @@ export function Dashboard({ lang }: { lang: Lang }) {
         </section>
 
         {/* ------------------------------------------------ value */}
-        <section id="value" className="mb-20 scroll-mt-20">
+        <section id="value" className="mb-20 scroll-mt-24 lg:scroll-mt-20">
           <SectionHeader
             eyebrow={`03 · ${t.value.eyebrow}`}
             title={t.value.title}
@@ -519,7 +546,7 @@ export function Dashboard({ lang }: { lang: Lang }) {
         </section>
 
         {/* ------------------------------------------------ people */}
-        <section id="people" className="mb-20 scroll-mt-20">
+        <section id="people" className="mb-20 scroll-mt-24 lg:scroll-mt-20">
           <SectionHeader
             eyebrow={`04 · ${t.people.eyebrow}`}
             title={t.people.title}
@@ -575,7 +602,7 @@ export function Dashboard({ lang }: { lang: Lang }) {
         </section>
 
         {/* ------------------------------------------------ methodology */}
-        <section id="methodology" className="mb-20 scroll-mt-20">
+        <section id="methodology" className="mb-20 scroll-mt-24 lg:scroll-mt-20">
           <SectionHeader
             eyebrow={`05 · ${t.method.eyebrow}`}
             title={t.method.title}
@@ -651,7 +678,7 @@ export function Dashboard({ lang }: { lang: Lang }) {
         </section>
 
         {/* ------------------------------------------------ about me */}
-        <section id="about" className="scroll-mt-20">
+        <section id="about" className="scroll-mt-24 lg:scroll-mt-20">
           <SectionHeader
             eyebrow={`06 · ${t.about.eyebrow}`}
             title={profile.name}
@@ -778,33 +805,6 @@ export function Dashboard({ lang }: { lang: Lang }) {
                   </CardContent>
                 </Card>
               ))}
-
-              {p.highlights.map((highlight) => (
-                <Card key={highlight.title}>
-                  <CardContent className="pt-6">
-                    <h3 className="mb-1.5 text-sm font-semibold">
-                      {highlight.title}
-                    </h3>
-                    <p className="text-sm leading-relaxed text-muted-foreground">
-                      {highlight.detail}
-                    </p>
-                  </CardContent>
-                </Card>
-              ))}
-
-              <Card>
-                <CardHeader>
-                  <CardTitle>{t.about.whyTitle}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    {p.whyNabep}
-                  </p>
-                  <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                    {p.nextStep}
-                  </p>
-                </CardContent>
-              </Card>
             </div>
 
             <Card className="h-fit">

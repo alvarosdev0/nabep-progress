@@ -17,6 +17,15 @@ export const es: Copy = {
     tagline: "Tablero operativo construido con declaraciones públicas",
     contact: "Contacto",
     source: "Código",
+    sectionsLabel: "Secciones",
+    sections: [
+      { id: "production", label: "Producción" },
+      { id: "assets", label: "Activos" },
+      { id: "value", label: "Valor" },
+      { id: "people", label: "Personas" },
+      { id: "methodology", label: "Método" },
+      { id: "about", label: "Sobre mí" },
+    ],
     switchShort: "EN",
     switchLabel: "View in English",
     switchHref: "/",
@@ -225,7 +234,6 @@ export const es: Copy = {
 
   about: {
     eyebrow: "Sobre mí",
-    whyTitle: "Por qué NABEP",
     cv: "Descargar CV",
     contact: "Correo",
     stack: {

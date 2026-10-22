@@ -25,6 +25,15 @@ export const en = {
     tagline: "Operations tracker built from public statements",
     contact: "Contact",
     source: "Source",
+    sectionsLabel: "Sections",
+    sections: [
+      { id: "production", label: "Production" },
+      { id: "assets", label: "Assets" },
+      { id: "value", label: "Value" },
+      { id: "people", label: "People" },
+      { id: "methodology", label: "Method" },
+      { id: "about", label: "About" },
+    ],
     switchShort: "ES",
     switchLabel: "Ver en español",
     switchHref: "/es",
@@ -233,7 +242,6 @@ export const en = {
 
   about: {
     eyebrow: "About me",
-    whyTitle: "Why NABEP",
     cv: "Download CV",
     contact: "Email",
     stack: {
