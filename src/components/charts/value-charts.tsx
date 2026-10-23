@@ -109,50 +109,84 @@ export function WorkforceChart({ lang }: { lang: Lang }) {
   } satisfies ChartConfig;
 
   return (
-    <div className="relative">
-      <ChartContainer
-        config={config}
-        className="mx-auto aspect-square max-h-[260px] w-full"
-      >
-        <PieChart>
-          <ChartTooltip
-            content={
-              <ChartTooltipContent
-                nameKey="label"
-                hideLabel
-                formatter={(value) => [
-                  fill(t.tooltip, {
-                    count: formatNumber(Number(value), locale),
-                  }),
-                  t.tooltipName,
-                ]}
-              />
-            }
-          />
-          <Pie
-            data={data}
-            dataKey="value"
-            nameKey="label"
-            innerRadius={58}
-            outerRadius={92}
-            strokeWidth={0}
-            paddingAngle={2}
-            isAnimationActive={false}
-          >
-            {data.map((entry) => (
-              <Cell key={entry.label} fill={entry.fill} />
-            ))}
-          </Pie>
-        </PieChart>
-      </ChartContainer>
-      <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center">
-        <span className="text-xl font-semibold tracking-tight tabular-nums">
-          {formatNumber(dataset.workforceTotal, locale)}
-        </span>
-        <span className="font-mono text-[10px] tracking-wider text-muted-foreground uppercase">
-          {t.totalLabel}
-        </span>
+    <div>
+      <div className="relative">
+        <ChartContainer
+          config={config}
+          className="mx-auto aspect-square max-h-[260px] w-full"
+        >
+          <PieChart>
+            <ChartTooltip
+              content={
+                <ChartTooltipContent
+                  nameKey="label"
+                  hideLabel
+                  formatter={(value, name) => (
+                    <span className="flex w-full items-center justify-between gap-3">
+                      <span className="text-muted-foreground">{name}</span>
+                      <span className="font-mono tabular-nums text-foreground">
+                        {fill(t.tooltip, {
+                          count: formatNumber(Number(value), locale),
+                        })}
+                      </span>
+                    </span>
+                  )}
+                />
+              }
+            />
+            <Pie
+              data={data}
+              dataKey="value"
+              nameKey="label"
+              innerRadius={58}
+              outerRadius={92}
+              strokeWidth={0}
+              paddingAngle={2}
+              isAnimationActive={false}
+            >
+              {data.map((entry) => (
+                <Cell key={entry.label} fill={entry.fill} />
+              ))}
+            </Pie>
+          </PieChart>
+        </ChartContainer>
+        <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center">
+          <span className="text-xl font-semibold tracking-tight tabular-nums">
+            {formatNumber(dataset.workforceTotal, locale)}
+          </span>
+          <span className="font-mono text-[10px] tracking-wider text-muted-foreground uppercase">
+            {t.totalLabel}
+          </span>
+        </div>
       </div>
+
+      <ul className="mt-4 grid gap-2 border-t border-border/60 pt-4">
+        {data.map((entry) => (
+          <li
+            key={entry.label}
+            className="flex items-center justify-between gap-3 text-xs"
+          >
+            <span className="flex items-center gap-2 text-muted-foreground">
+              <span
+                aria-hidden="true"
+                className="size-2 shrink-0 rounded-full"
+                style={{ background: entry.fill }}
+              />
+              {entry.label}
+            </span>
+            <span className="font-mono tabular-nums text-foreground">
+              {formatNumber(entry.value, locale)}
+              <span className="ml-2 text-muted-foreground">
+                {formatNumber(
+                  Math.round((entry.value / dataset.workforceTotal) * 100),
+                  locale,
+                )}
+                %
+              </span>
+            </span>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

@@ -80,32 +80,41 @@ export const profile: Profile = {
   en: {
     headline: "Systems engineering student · Front-end developer",
     summary:
-      "Hi! I'm Álvaro Sandrea, a self-taught front-end developer with 5 years of experience, focused on user-friendly digital experiences. I've been studying the magic of the web — how sites can do great things for people — and over time I've worked on quality UX, friendly communication with a team, accessibility for all, and useful, consistent interfaces across applications.",
+      "I see technology as a tool to transform and uplift people. My approach combines active listening, clarity when communicating and building digital solutions that are simple to use, always oriented towards teamwork and continuous improvement.",
     experience: {
       title: "Experience",
       items: [
+        {
+          role: "Technical Support",
+          company: "Pulsed Calls",
+          period: "Jul 2026 – present",
+          location: "Venezuela",
+          bullets: [
+            "Joined the support team to handle and resolve real-time operational incidents for heavy transport drivers.",
+            "Guided users step by step to the technical solution, ensuring strict compliance with protocols and service continuity.",
+            "Kept a formal, cordial tone under high pressure, with operational discipline, self-management and the ability to follow directives and work in a team.",
+          ],
+        },
+        {
+          role: "Software developer",
+          company: "U. E. Instituto San José",
+          period: "Jul – Aug 2026",
+          location: "Ciudad Ojeda, Lagunillas",
+          bullets: [
+            "Contributed to an educational study app for the institute's robotics classroom. We centralised all the subject's information in the app.",
+            "Gathered requirements from teachers and the institute and turned them into a technological solution built around their needs, with study plans and interactive mini-games for students.",
+            "We made the software meet its goal, and it is currently used at the institute by a wide range of students in class.",
+          ],
+        },
         {
           role: "Front-end developer",
           company: "Yariz Eats",
           period: "Jul – Aug 2025",
           location: "Ciudad Ojeda, Venezuela",
           bullets: [
-            "Joined an UberEats-style delivery startup three weeks before the final delivery, with the store section still unresolved.",
+            "Joined an UberEats-style delivery startup three weeks before the final delivery and closed the store section.",
             "Solved how merchants read sales, deliveries, cancellations and commercial activity: circular indicators with a loading bar, so the operation is understood at a glance.",
-            "Delivered the store profile, product management, active orders and in-progress deliveries views, end to end.",
-            "Closed the section with testing on real devices alongside the client; it shipped ready for the pilot launch.",
-          ],
-        },
-        {
-          role: "Technical Support and Customer Service",
-          company: "Pulsed Calls",
-          period: "Jul 2026 – present",
-          location: "Venezuela",
-          bullets: [
-            "Joined the support team to manage and resolve real-time operational incidents for heavy transport drivers.",
-            "Assisted drivers under high pressure, keeping a formal, cordial tone focused on de-escalating conflicts on the road.",
-            "Guided users step by step to the technical solution, ensuring strict compliance with protocols and service continuity.",
-            "Showed operational discipline, self-management, the ability to follow directives precisely and adaptability to work in a team.",
+            "Delivered the store profile, product management, active orders and in-progress deliveries views, tested with the client on real devices and ready for the pilot launch.",
           ],
         },
       ],
@@ -163,32 +172,41 @@ export const profile: Profile = {
   es: {
     headline: "Estudiante de ingeniería en sistemas · Desarrollador front-end",
     summary:
-      "¡Hola! Soy Álvaro Sandrea, desarrollador front-end autodidacta con 5 años de experiencia, enfocado en experiencias digitales fáciles de usar. He estado estudiando la magia de la web —cómo los sitios pueden hacer grandes cosas por las personas— y con el tiempo he trabajado en UX de calidad, comunicación cercana con el equipo, accesibilidad para todos e interfaces útiles y consistentes entre aplicaciones.",
+      "Entiendo la tecnología como una herramienta para transformar e impulsar a las personas. Mi enfoque combina la escucha activa, la claridad al comunicar y el desarrollo de soluciones digitales sencillas de usar, siempre orientadas al trabajo en equipo y a la mejora continua.",
     experience: {
       title: "Experiencia",
       items: [
+        {
+          role: "Soporte técnico",
+          company: "Pulsed Calls",
+          period: "jul 2026 – presente",
+          location: "Venezuela",
+          bullets: [
+            "Me integré al equipo de soporte para atender y resolver, en tiempo real, incidencias operativas de conductores de transporte pesado.",
+            "Guíé a los usuarios paso a paso hacia la solución técnica de sus problemas, garantizando el cumplimiento estricto de los protocolos y la continuidad del servicio.",
+            "Mantuve un trato formal y cordial en situaciones de alta presión, con disciplina operacional, autogestión y capacidad para acatar directrices y trabajar en equipo.",
+          ],
+        },
+        {
+          role: "Desarrollador de software",
+          company: "U. E. Instituto San José",
+          period: "jul – ago 2026",
+          location: "Ciudad Ojeda, Lagunillas",
+          bullets: [
+            "Contribuí al desarrollo de una aplicación de estudio didáctica para el salón de robótica del instituto. Centralizamos toda la información de la materia en dicha aplicación.",
+            "Levantamos los requerimientos de los docentes y del instituto y los convertimos en una solución tecnológica ajustada a sus necesidades, con planes de estudio y minijuegos interactivos para los estudiantes.",
+            "Logramos que el software cumpliera su objetivo y actualmente es utilizado en el instituto por una gran variedad de estudiantes en clases.",
+          ],
+        },
         {
           role: "Desarrollador front-end",
           company: "Yariz Eats",
           period: "jul – ago 2025",
           location: "Ciudad Ojeda, Venezuela",
           bullets: [
-            "Me integré a una startup de delivery tipo UberEats tres semanas antes de la entrega final, con la sección de la tienda todavía sin resolver.",
+            "Entré a una startup de delivery tipo UberEats tres semanas antes de la entrega final y cerré la sección de la tienda.",
             "Resolví cómo el comercio lee sus ventas, entregas, cancelaciones y actividad comercial: indicadores circulares con barra de carga, para entender la operación de un vistazo.",
-            "Entregué las vistas de perfil de tienda, gestión de productos, pedidos activos y entregas en curso, de principio a fin.",
-            "Cerré la sección con pruebas en dispositivos reales junto al cliente; quedó lista para el lanzamiento piloto.",
-          ],
-        },
-        {
-          role: "Soporte técnico y atención al cliente",
-          company: "Pulsed Calls",
-          period: "jul 2026 – presente",
-          location: "Venezuela",
-          bullets: [
-            "Me integré al equipo de soporte para gestionar la atención y resolución de incidencias operativas de conductores de transporte pesado en tiempo real.",
-            "Atendí a los transportistas en situaciones de alta presión, manteniendo siempre un trato formal, cordial y enfocado en desescalar conflictos en ruta.",
-            "Guíé a los usuarios paso a paso hacia la solución técnica de sus problemas, garantizando el cumplimiento estricto de los protocolos y la continuidad del servicio.",
-            "Demostré disciplina operacional, autogestión, capacidad para acatar directrices de forma precisa y adaptabilidad para trabajar en equipo.",
+            "Entregué las vistas de perfil de tienda, gestión de productos, pedidos activos y entregas en curso, probadas con el cliente en dispositivos reales y listas para el lanzamiento piloto.",
           ],
         },
       ],

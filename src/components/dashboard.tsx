@@ -638,9 +638,9 @@ export function Dashboard({ lang }: { lang: Lang }) {
             }
           />
 
-          <div className="grid gap-4 lg:grid-cols-[1.4fr_1fr] lg:items-start">
+          <div className="grid gap-4 lg:grid-cols-2 lg:items-start">
             <Card>
-              <CardContent className="pt-6">
+              <CardContent>
                 <p className="text-base leading-relaxed text-foreground/90">
                   {p.summary}
                 </p>
@@ -735,9 +735,11 @@ export function Dashboard({ lang }: { lang: Lang }) {
                         <p className="text-sm font-medium text-foreground">
                           {job.role} · {job.company}
                         </p>
-                        <p className="mt-0.5 text-xs text-muted-foreground">
-                          {job.location}
-                        </p>
+                        {job.location && (
+                          <p className="mt-0.5 text-xs text-muted-foreground">
+                            {job.location}
+                          </p>
+                        )}
                       </div>
                       {job.period && (
                         <span className="shrink-0 font-mono text-[11px] text-muted-foreground">
